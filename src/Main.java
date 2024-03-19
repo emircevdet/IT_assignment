@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Scanner giris = new Scanner(System.in);
@@ -25,10 +26,10 @@ public class Main {
             System.out.println((i + 1) + "Yaşınızı giriniz:");
             yas[i] = giris.nextByte();
 
-
         }
-        for (; ; ) {
-            System.out.println("1-Listeleme\n 2-İsim arama\n 3-Erkeklerin yaş ortalaması\n 4-Evlilerin maaş ortalaması\n 5-En yüksek maaşlı kadın bilgisi\n 6-En düşük yaş kime ait\n 7-Çıkıs");
+        for (;;) {
+            System.out.println(
+                    "1-Listeleme\n 2-İsim arama\n 3-Erkeklerin yaş ortalaması\n 4-Evlilerin maaş ortalaması\n 5-En yüksek maaşlı kadın bilgisi\n 6-En düşük yaş kime ait\n 7-Çıkıs");
             menu = giris.nextByte();
 
             switch (menu) {
@@ -46,19 +47,19 @@ public class Main {
                     System.out.println("Aranacak adı giriniz:");
                     String arananIsim = giris.next();
                     for (int i = 0; i < ks; i++) {
-                        System.out.println("Adı:" + ad[i]);
-                        System.out.println("Maaşı:" + maas[i]);
-                        System.out.println("Medeni durumu:" + medeniDurum[i]);
-                        System.out.println("Cinsiyeti:" + cinsiyet[i]);
-                        System.out.println("Yaşı:" + yas[i]);
-
-
+                        if (arananIsim.equalsIgnoreCase(ad[i])) {
+                            System.out.println("Adı:" + ad[i]);
+                            System.out.println("Maaşı:" + maas[i]);
+                            System.out.println("Medeni durumu:" + medeniDurum[i]);
+                            System.out.println("Cinsiyeti:" + cinsiyet[i]);
+                            System.out.println("Yaşı:" + yas[i]);
+                        }
                     }
                     break;
                 case 3:
                     int toplamYas = 0, erkekSayisi = 0;
                     for (int i = 0; i < ks; i++) {
-                        if (cinsiyet[i] == "Erkek" || cinsiyet[i] == "Kadın") {
+                        if (cinsiyet[i].equalsIgnoreCase("erkek")) {
                             toplamYas += yas[i];
                             erkekSayisi++;
                         }
@@ -99,7 +100,8 @@ public class Main {
                         }
                     }
                     if (!enYuksekMaasAlanKadin.isEmpty()) {
-                        System.out.println("En yüksek maaşı alan kadın: " + enYuksekMaasAlanKadin + ", Maaşı: " + enYuksekMaas);
+                        System.out.println(
+                                "En yüksek maaşı alan kadın: " + enYuksekMaasAlanKadin + ", Maaşı: " + enYuksekMaas);
                     } else {
                         System.out.println("Kadın bulunamadı.");
                     }
@@ -118,10 +120,12 @@ public class Main {
                         System.out.println("En küçük yaşa sahip kişi: " + enKucukYasiOlanKisi + ", Yaşı: " + enKucukYas);
                     } else {
                         System.out.println("Kişi bulunamadı.");
-                    }break;
+                    }
+                    break;
 
                 case 7:
                     System.out.println("Program bitti");
+                    giris.close();
                     break;
 
             }
